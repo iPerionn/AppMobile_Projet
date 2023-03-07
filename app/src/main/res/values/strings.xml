@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">AppMobile_Projet</string>
+    <string name="app_name">PocketMon</string>
+    <string name="pokeStreak">PokeStreak</string>
+    <string name="pokedex">PokeDex</string>
+    <string name="lootbox">Lootbox</string>
+    <string name="profile">Profile</string>
 </resources>
