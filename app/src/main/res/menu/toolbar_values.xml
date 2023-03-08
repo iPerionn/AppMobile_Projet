@@ -4,6 +4,6 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/add" android:icon="@android:drawable/ic_menu_add"
-        app:showAsAction="always" android:title="patate"/>
+        app:showAsAction="always" android:title="showNav"/>
 
 </menu>
