@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">AppMobile_Projet</string>
+    <string name="app_name">Pokemon</string>
+    <string name="btnMenu">Menu</string>
+    <string name="btnJeu1">Mini Jeu 1</string>
+    <string name="nameMenu">Ce menu mama</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
