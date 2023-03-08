@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">Pokemon</string>
-    <!-- String pour le menu navigation :-->
+    <string name="app_name">PocketMon</string>
+
+    <!-- String du menu -->
+    <string name="pokeStreak">PokeStreak</string>
+    <string name="pokedex">PokeDex</string>
+    <string name="lootbox">Lootbox</string>
+    <string name="profile">Profile</string>
+
+    <!-- String pour le menu navigation -->
     <string name="btnMenu">Menu</string>
     <string name="btnJeu1">Mini Jeu 1</string>
     <string name="btnJeu2">Mini jeu 2</string>

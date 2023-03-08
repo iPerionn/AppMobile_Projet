@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,6 +28,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         configureDrawerLayout();
         configureNavigationView();
         configureNavigationView();
+
+        //Affichage de l'écran de menu au lancement de l'application :
+        FragmentTransaction tf = getSupportFragmentManager().beginTransaction();
+        tf.replace(R.id.fragmentG,new MenuActivity()).commit();
     }
     @Override // Association des éléments du ToolBar au sein de son layout
     public boolean onCreateOptionsMenu(Menu menu) {
