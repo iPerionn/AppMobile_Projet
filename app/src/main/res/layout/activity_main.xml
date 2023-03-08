@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:openDrawer="start"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -15,12 +16,12 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:layout_width="wrap_content"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
             android:id="@+id/tool_bar"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
             app:menu="@menu/toolbar_values"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <FrameLayout
             android:layout_width="match_parent"

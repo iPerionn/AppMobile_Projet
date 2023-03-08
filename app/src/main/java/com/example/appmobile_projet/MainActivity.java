@@ -36,7 +36,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override //Traitement des actions du ToolBar
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        //ouvre le menu de navigation :
+        if (item.getItemId() == R.id.openNav) {
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
         return true;
     }
@@ -51,12 +54,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override //Traitement des actions du NavigationView
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()){
-
+            case R.id.btnMenu:
+                break;
+            case R.id.btnJeu1:
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
     //Configuration des éléments du layout :
     //ToolBar :
     private void configureToolBar(){

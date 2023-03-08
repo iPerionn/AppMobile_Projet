@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/add" android:icon="@android:drawable/ic_menu_add"
-        app:showAsAction="always" android:title="showNav"/>
+        android:id="@+id/openNav" android:icon="@drawable/pokeball_icon"
+        app:showAsAction="always" android:title="@string/showNav"/>
 
 </menu>
