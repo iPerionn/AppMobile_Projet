@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/btnMenu"
+        android:title="@string/btnMenu"
+        android:icon="@drawable/home"/>
+    <item
+        android:id="@+id/btnJeu1"
+        android:title="@string/btnJeu1"
+        android:icon="@drawable/choice"/>
+    <item
+        android:id="@+id/btnJeu2"
+        android:title="@string/btnJeu2"
+        android:icon="@drawable/zoom"/>
+
+</menu>
