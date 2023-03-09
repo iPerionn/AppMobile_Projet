@@ -10,5 +10,5 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/pokeball_icon"/>
+        app:srcCompat="@drawable/pokemon_title"/>
 </LinearLayout>
