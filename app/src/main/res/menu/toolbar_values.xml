@@ -4,6 +4,5 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/openNav" android:icon="@drawable/pokeball_icon"
-        app:showAsAction="always" android:title="@string/showNav"/>
-
+        app:showAsAction="always" android:title="@string/app_name"/>
 </menu>
