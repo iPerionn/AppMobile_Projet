@@ -19,6 +19,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar myToolBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+
+    private Fragment frag_menu;
+    private Fragment frag_pokestreak;
+
+    private static final int id_frag_menu = 0;
+    private static final int id_frag_pokestreak = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         configureNavigationView();
 
         //Affichage de l'écran de menu au lancement de l'application :
-        FragmentTransaction tf = getSupportFragmentManager().beginTransaction();
-        tf.replace(R.id.fragmentG,new MenuActivity()).commit();
+        joinFragToId(id_frag_menu);
     }
     @Override // Association des éléments du ToolBar au sein de son layout
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,13 +67,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.btnMenu:
+                joinFragToId(id_frag_menu);
                 break;
             case R.id.btnJeu1:
+                joinFragToId(id_frag_pokestreak);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+            //ici on lie un fragment créer à un id fixe puis on fait appel a la methode pour les afficher
+    private void joinFragToId(int fragID){
+        switch (fragID){
+            case id_frag_menu:
+                if(frag_menu == null) frag_menu = new MenuActivity();
+                changeFragment(frag_menu);
+                break;
+            case id_frag_pokestreak:
+                if(frag_pokestreak == null) frag_pokestreak = new PokeStreakActivity();
+                changeFragment(frag_pokestreak);
+                break;
+        }
+    }
+
     //Configuration des éléments du layout :
     //ToolBar :
     private void configureToolBar(){
@@ -85,5 +108,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void configureNavigationView(){
         navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    // Methode pour changer le fragment afficher part un autre :
+    private void changeFragment(Fragment fragment){
+        if(!fragment.isVisible()){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentG, fragment).commit();
+        }
     }
 }
