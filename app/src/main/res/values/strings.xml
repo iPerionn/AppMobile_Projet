@@ -4,6 +4,7 @@
     <!-- String du menu -->
     <string name="pokeStreak">PokeStreak</string>
     <string name="pokedex">PokeDex</string>
+    <string name="zoomon">ZooMon</string>
     <string name="lootbox">Lootbox</string>
     <string name="profile">Profile</string>
 

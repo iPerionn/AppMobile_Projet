@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar myToolBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+
+    private FragmentTransaction tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         configureNavigationView();
 
         //Affichage de l'écran de menu au lancement de l'application :
-        FragmentTransaction tf = getSupportFragmentManager().beginTransaction();
+        tf = getSupportFragmentManager().beginTransaction();
         tf.replace(R.id.fragmentG,new MenuActivity()).commit();
     }
     @Override // Association des éléments du ToolBar au sein de son layout
@@ -60,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override //Traitement des actions du NavigationView
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()){
+            case R.id.btnJeu2:
+                tf.replace(R.id.fragmentG,new ZooMonActivity()).commit();
+                break;
             case R.id.btnMenu:
                 break;
             case R.id.btnJeu1:
