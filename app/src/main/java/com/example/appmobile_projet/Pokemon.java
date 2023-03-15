@@ -1,7 +1,5 @@
 package com.example.appmobile_projet;
 
-import java.net.URL;
-
 public class Pokemon {
     private String name;
     private  String imageURL;
@@ -12,10 +10,10 @@ public class Pokemon {
     private Integer defense_spe;
     private Integer speed;
 
-    public Pokemon(String name, String imageURL, Integer hp, Integer attack, Integer defense, Integer attack_spe, Integer defense_spe, Integer speed) {
+    public Pokemon(String name, String image, Integer hp, Integer attack, Integer defense, Integer attack_spe, Integer defense_spe, Integer speed) {
         this.name = name;
-        this.imageURL = imageURL;
         this.hp = hp;
+        this.imageURL = image;
         this.attack = attack;
         this.defense = defense;
         this.attack_spe = attack_spe;
