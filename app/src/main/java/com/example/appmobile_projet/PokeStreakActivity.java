@@ -28,6 +28,7 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     TextView textViewL;
     TextView textViewR;
     RequestTask requestOnAPI;
+    TextView score;
     int points;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
@@ -36,6 +37,8 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     // A la création du fragment on créer 2 pokemon et on affiche leurs noms et leurs images
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        //association de l'affichage du score à sa vue :
+        score = view.findViewById(R.id.score);
         // création du pokemon de gauche :
         requestOnAPI = new RequestTask();
         textViewL = view.findViewById(R.id.name_pokemonL);
@@ -51,7 +54,6 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     }
     @Override
     public void onClick(View view){
-        TextView score = view.findViewById(R.id.score);
         switch (view.getId()){
             case R.id.img_pokemonL:
                 if (compare() == pokemonL){
@@ -74,7 +76,8 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
         }
         requestOnAPI = new RequestTask();
         requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
-        //score.setText("Votre série de victoire est de : "+points);
+        String newRes = "Votre série de victoire est de : "+points;
+        score.setText(newRes);
     }
     public Pokemon compare(){
         if (pokemonR.getAttack() == pokemonL.getAttack()){
