@@ -1,17 +1,17 @@
 package com.example.appmobile_projet;
 
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -29,11 +29,17 @@ import java.net.URLEncoder;
 
 public class ZooMonActivity extends Fragment implements View.OnClickListener{
     String imageURL;
-
     String nomPokemon;
     ImageView zoomon_img;
     RequestTask requestOnAPI;
     TextView score;
+    EditText reponse;
+
+    TextView debug;
+
+    View context;
+
+    int score_numerique;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
@@ -43,7 +49,12 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         requestOnAPI = new RequestTask();
+        context = getActivity().findViewById(android.R.id.content);
         zoomon_img = view.findViewById(R.id.zoomon_img);
+        score = view.findViewById(R.id.zoomon_score);
+        score_numerique = 0;
+        reponse = view.findViewById(R.id.reponse);
+        debug = view.findViewById(R.id.debug);
         requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
         view.findViewById(R.id.refresh).setOnClickListener(this);
     }
@@ -59,9 +70,28 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view){
         if (view.getId() == R.id.refresh){
-            requestOnAPI = new RequestTask();
-            requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
+            String reponseText = reponse.getText().toString();
+            //Si l'utilisateur ne rentre rien, affichage d'une snackbar
+            if (reponseText.isEmpty()) {
+                Snackbar.make(context, "Merci de rentrer un nom de pokemon", Snackbar.LENGTH_LONG).show();
+            } else {
+                verifRéponse(reponseText);
+                chargementNouveauPokemon();
+            }
         }
+    }
+
+    private void verifRéponse(String reponseUtilisateur) {
+        if ( reponseUtilisateur.equalsIgnoreCase(nomPokemon)) {
+            score_numerique++;
+        } else {
+            score_numerique = 0;
+        }
+    }
+
+    private void chargementNouveauPokemon(){
+        requestOnAPI = new RequestTask();
+        requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
     }
     private class RequestTask extends AsyncTask<String, Void, String> {
 
@@ -107,7 +137,9 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
                 Picasso.get()
                         .load(decodeURL(toDecode))
                         .into(zoomon_img);
-
+                debug.setText(nomPokemon);
+                score.setText(String.valueOf(score_numerique));
+                reponse.setText("");
             } catch (Exception e) {
                 e.printStackTrace();
             }
