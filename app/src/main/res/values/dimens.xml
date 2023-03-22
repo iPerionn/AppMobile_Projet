@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="header_nav">200dp</dimen>
+    <dimen name="zoomon_img">250dp</dimen>
 </resources>

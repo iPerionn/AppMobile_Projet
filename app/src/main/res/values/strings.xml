@@ -4,7 +4,7 @@
     <!-- String du menu -->
     <string name="pokeStreak">PokeStreak</string>
     <string name="pokedex">PokeDex</string>
-    <string name="lootbox">Lootbox</string>
+    <string name="zoomon">ZooMon</string>
     <string name="profile">Profile</string>
 
     <!-- String pour le menu navigation -->
@@ -12,15 +12,14 @@
     <string name="btnJeu1">Mini Jeu 1</string>
     <string name="btnJeu2">Mini jeu 2</string>
 
-    <string name="nameMenu">Ce menu mama</string>
-
     <!-- String etat du menu navigation -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- String du toolbar -->
-    <string name="showNav">montre la nav</string>
 
+    <!-- String du jeu zoomon -->
+    <string name="refresh">Refresh</string>
     <!-- String du jeu pokestreak -->
     <string name="questionPokestreak">Quel Pokemon posséde le plus de Défense ? </string>
     <string name="winStreak">Votre série de victoire est de : 0</string>
