@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -19,7 +21,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-
+import java.util.Arrays;
+import java.util.List;
 public class PokeStreakActivity extends Fragment implements View.OnClickListener{
     Pokemon pokemonL;
     Pokemon pokemonR;
@@ -29,7 +32,9 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     TextView textViewR;
     RequestTask requestOnAPI;
     TextView score;
-    int points;
+    TextView question;
+    View context;
+    int points = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
         return inflater.inflate(R.layout.frag_pokestreak, container, false);
@@ -37,8 +42,10 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     // A la création du fragment on créer 2 pokemon et on affiche leurs noms et leurs images
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        //association de l'affichage du score à sa vue :
+        //association des élément à leurs vues :
+        context = getActivity().findViewById(android.R.id.content);
         score = view.findViewById(R.id.score);
+        question = view.findViewById(R.id.qPokestreak);
         // création du pokemon de gauche :
         requestOnAPI = new RequestTask();
         textViewL = view.findViewById(R.id.name_pokemonL);
@@ -49,42 +56,93 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
         textViewR = view.findViewById(R.id.name_pokemonR);
         imageButtonR = view.findViewById(R.id.img_pokemonR);
         requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
+        //ajout des évenements lié au bouttons
         imageButtonL.setOnClickListener(this);
         imageButtonR.setOnClickListener(this);
     }
-    @Override
+    @Override // Appel lors d'un choix de l'utilisateur : instancie le score et lance le nouvelle affichage
     public void onClick(View view){
-        switch (view.getId()){
-            case R.id.img_pokemonL:
-                if (compare() == pokemonL){
-                    pokemonR = null;
-                    points += 1;
-                }else {
-                    pokemonL =null;
-                    points = 0;
-                }
-                break;
-            case R.id.img_pokemonR:
-                if (compare() == pokemonR){
-                pokemonL = null;
-                points += 1;
-            }else {
-                pokemonR =null;
-                points = 0;
+        try {
+            switch (view.getId()){
+                case R.id.img_pokemonL:
+                    if (compare() == pokemonL || compare() == null){
+                        points += 1;
+                    }else {
+                        points = 0;
+                    }
+                    break;
+                case R.id.img_pokemonR:
+                    if (compare() == pokemonR || compare() == null){
+                        points += 1;
+                    }else {
+                        points = 0;
+                    }
+                    break;
             }
-                break;
+            pokemonL = null;
+            pokemonR = null;
+            requestOnAPI = new RequestTask();
+            requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
+            requestOnAPI = new RequestTask();
+            requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
+            String newRes = "Votre série de victoire est de : "+points;
+            score.setText(newRes);
+        }catch (Exception e){
+            Snackbar.make(context,"Attention vous avez cliquer trop vite ! Cela peut entrainer des erreurs",Snackbar.LENGTH_LONG).show();
         }
-        requestOnAPI = new RequestTask();
-        requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
-        String newRes = "Votre série de victoire est de : "+points;
-        score.setText(newRes);
     }
-    public Pokemon compare(){
-        if (pokemonR.getAttack() == pokemonL.getAttack()){
+    int statGetForL = 0;
+    int statGetForR = 0;
+    public Pokemon compare(){ // Compare en fonction d'une statistique choisi aléatoirement les 2 pokemons et retourne celui en possédant le plus
+        if (statGetForR ==0 && statGetForL ==0){
+            statGetForR = pokemonR.getDefense();
+            statGetForL = pokemonL.getDefense();
+        }
+        if (statGetForL == statGetForR){
+            setStats();
             return null;
-        } else if (pokemonL.getAttack() > pokemonR.getAttack()) {
+        } else if (statGetForL > statGetForR) {
+            setStats();
             return pokemonL;
-        }else return pokemonR;
+        }else {
+            setStats();
+            return pokemonR;
+        }
+    }
+    public void setStats(){
+        List<Integer> statSelectorForL =
+                Arrays.asList(pokemonL.getAttack(),pokemonL.getAttack_spe(),pokemonL.getDefense_spe(),
+                        pokemonL.getDefense(),pokemonL.getHp(),pokemonL.getSpeed());
+        List<Integer> statSelectorForR =
+                Arrays.asList(pokemonR.getAttack(),pokemonR.getAttack_spe(),pokemonR.getDefense_spe(),
+                        pokemonR.getDefense(),pokemonR.getHp(),pokemonR.getSpeed());
+        int random = (int) (Math.random() * 5) + 1;
+        statGetForL = statSelectorForL.get(random);
+        statGetForR = statSelectorForR.get(random);
+        showNewQuestion(random);
+    }
+    public void showNewQuestion(int i){
+        String resp = "Probléme d'affichage :/";
+        switch (i){
+            case 0 :
+                resp = "Quel Pokemon posséde le plus d'attaque ?";
+                break;
+            case 1 :
+                resp = "Quel Pokemon posséde le plus d'attaque spécial ?";
+                break;
+            case 2 :
+                resp = "Quel Pokemon posséde le plus de défense spéciale ?";
+                break;
+            case 3 :
+                resp = "Quel Pokemon posséde le plus de défense  ?";
+                break;
+            case 4 :
+                resp = "Quel Pokemon posséde le plus d'hp ?";
+                break;
+            case 5 :
+                resp = "Quel Pokemon posséde le plus de vitesse  ?";
+        }
+        question.setText(resp);
     }
     @Override
     public void onDestroy() {
@@ -135,7 +193,6 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
             try {
                 toDecode = new JSONObject(result);
                 setView(decodePokemon(toDecode));
-
             } catch (Exception e) {
                 e.printStackTrace();
                 pokemonL = null;

@@ -22,6 +22,6 @@
     <string name="showNav">montre la nav</string>
 
     <!-- String du jeu pokestreak -->
-    <string name="questionPokestreak">Le quel de c\'est pokemon posséde le plus de Défense ? </string>
+    <string name="questionPokestreak">Quel Pokemon posséde le plus de Défense ? </string>
     <string name="winStreak">Votre série de victoire est de : 0</string>
 </resources>
