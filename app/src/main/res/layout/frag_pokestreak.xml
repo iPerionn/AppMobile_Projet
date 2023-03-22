@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".PokeStreakActivity">
 
     <TextView
@@ -10,6 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
         android:text="@string/questionPokestreak" />
 
     <LinearLayout
@@ -22,6 +27,7 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/PokemonName"
             android:layout_marginTop="10dp"
             android:id="@+id/name_pokemonL"
             android:layout_width="match_parent"
@@ -45,6 +51,7 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/PokemonName"
             android:layout_marginTop="10dp"
             android:id="@+id/name_pokemonR"
             android:layout_width="match_parent"
@@ -54,16 +61,20 @@
         <ImageButton
             android:id="@+id/img_pokemonR"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:id="@+id/score"
+        android:textSize="25dp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginBottom="35dp"
         android:text="@string/winStreak" />
 
 </RelativeLayout>
