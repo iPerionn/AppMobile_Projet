@@ -22,7 +22,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:background=""
             android:layout_marginTop="10dp"
             android:id="@+id/name_pokemonL"
             android:layout_width="match_parent"
@@ -32,8 +31,7 @@
         <ImageButton
             android:id="@+id/img_pokemonL"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onClick="compare"/>
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
@@ -56,8 +54,7 @@
         <ImageButton
             android:id="@+id/img_pokemonR"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onClick="compare" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

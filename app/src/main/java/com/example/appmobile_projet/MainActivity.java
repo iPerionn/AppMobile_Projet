@@ -23,8 +23,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment frag_menu;
     private Fragment frag_pokestreak;
 
+    private Fragment frag_zoomon;
+
     private static final int id_frag_menu = 0;
     private static final int id_frag_pokestreak = 1;
+
+    private static final int id_frag_zoomon = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.btnJeu1:
                 joinFragToId(id_frag_pokestreak);
                 break;
+            case R.id.btnJeu2:
+                joinFragToId(id_frag_zoomon);
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -87,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case id_frag_pokestreak:
                 if(frag_pokestreak == null) frag_pokestreak = new PokeStreakActivity();
                 changeFragment(frag_pokestreak);
+                break;
+            case id_frag_zoomon:
+                if(frag_zoomon == null) frag_zoomon = new ZooMonActivity();
+                changeFragment(frag_zoomon);
                 break;
         }
     }
