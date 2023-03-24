@@ -14,7 +14,7 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + DBContract.Form.TABLE_NAME + " (" +
-                DBContract.Form._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                DBContract.Form._ID + " INTEGER PRIMARY KEY,"+
                 DBContract.Form.COLUMN_NAME + " TEXT)";
         db.execSQL(query);
     }
@@ -25,9 +25,10 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(query);
         onCreate(db);
     }
-    public void insertPokemon(String name){
+    public void insertPokemon(String name, String id){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues row = new ContentValues();
+        row.put(DBContract.Form._ID,id);
         row.put(DBContract.Form.COLUMN_NAME,name);
         db.insert(DBContract.Form.TABLE_NAME,null,row);
     }

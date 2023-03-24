@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.openDrawer(GravityCompat.START);
             return true;
         }
+        if (item.getItemId() == R.id.logoApp) {
+            joinFragToId(id_frag_menu);
+        }
         return true;
     }
     @Override
