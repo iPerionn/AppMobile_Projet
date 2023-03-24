@@ -1,8 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center_vertical|start"
     tools:context=".MainActivity">
+    <item android:id="@+id/openNav" android:icon="@drawable/threebarmenu"
+        app:showAsAction="always" android:title="@string/openNav"/>
+
     <item
-        android:id="@+id/openNav" android:icon="@drawable/pokeball_icon"
+        android:id="@+id/logoApp" android:icon="@drawable/pokeball_icon"
         app:showAsAction="always" android:title="@string/app_name"/>
 </menu>
