@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         configureDrawerLayout();
         configureNavigationView();
         configureNavigationView();
-
+        configureToolBar();
         //Affichage de l'écran de menu au lancement de l'application :
         joinFragToId(id_frag_menu);
     }

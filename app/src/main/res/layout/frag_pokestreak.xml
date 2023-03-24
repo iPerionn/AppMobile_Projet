@@ -16,53 +16,56 @@
         android:fontFamily="monospace"
         android:textStyle="bold"
         android:text="@string/questionPokestreak" />
-
     <LinearLayout
-        android:id="@+id/contain_pokemonL"
-        android:layout_width="205dp"
-        android:layout_height="500dp"
-        android:layout_below="@id/qPokestreak"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/border_style_card"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/qPokestreak">
 
-        <TextView
-            style="@style/PokemonName"
-            android:layout_marginTop="10dp"
-            android:id="@+id/name_pokemonL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"/>
+        <LinearLayout
+            android:id="@+id/contain_pokemonL"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="500dp"
+            android:background="@drawable/border_style_card"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/img_pokemonL"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            <TextView
+                style="@style/PokemonName"
+                android:layout_marginTop="10dp"
+                android:id="@+id/name_pokemonL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
 
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/img_pokemonL"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-    <LinearLayout
-        android:id="@+id/contain_pokemonR"
-        android:layout_width="205dp"
-        android:layout_height="500dp"
-        android:layout_below="@id/qPokestreak"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/border_style_card"
-        android:orientation="vertical">
+        </LinearLayout>
 
-        <TextView
-            style="@style/PokemonName"
-            android:layout_marginTop="10dp"
-            android:id="@+id/name_pokemonR"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"/>
+        <LinearLayout
+            android:id="@+id/contain_pokemonR"
+            android:layout_width="0dp"
+            android:layout_height="500dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_style_card"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/img_pokemonR"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            <TextView
+                style="@style/PokemonName"
+                android:layout_marginTop="10dp"
+                android:id="@+id/name_pokemonR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
 
+            <ImageButton
+                android:id="@+id/img_pokemonR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

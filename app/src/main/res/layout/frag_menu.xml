@@ -23,10 +23,10 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/pokedex"
+        android:id="@+id/zomMon"
         android:layout_width="match_parent"
         android:layout_height="150sp"
-        android:text="@string/pokedex"
+        android:text="@string/zoomon"
         android:textSize="20sp"
         android:gravity="bottom|start"
         android:fontFamily="sans-serif-black"
@@ -37,10 +37,10 @@
         android:background="@drawable/background_button_1"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/profile"
+        android:id="@+id/pokedex"
         android:layout_width="match_parent"
         android:layout_height="150sp"
-        android:text="@string/profile"
+        android:text="@string/pokedex"
         android:textSize="20sp"
         android:gravity="bottom|start"
         android:fontFamily="sans-serif-black"

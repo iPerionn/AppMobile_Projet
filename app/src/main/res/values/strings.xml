@@ -17,10 +17,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- String du toolbar -->
+    <string name="openNav">openNav</string>
 
     <!-- String du jeu zoomon -->
     <string name="refresh">Refresh</string>
     <string name="zoomon_hint">Who is that pokemon ?</string>
+
     <!-- String du jeu pokestreak -->
     <string name="questionPokestreak">Quel Pokemon posséde le plus de Défense ? </string>
     <string name="winStreak">Votre série de victoire est de : 0</string>
