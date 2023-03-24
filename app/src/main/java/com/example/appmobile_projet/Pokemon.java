@@ -1,6 +1,7 @@
 package com.example.appmobile_projet;
 
 public class Pokemon {
+    private int id;
     private String name;
     private  String imageURL;
     private Integer hp;
@@ -10,7 +11,8 @@ public class Pokemon {
     private Integer defense_spe;
     private Integer speed;
 
-    public Pokemon(String name, String image, Integer hp, Integer attack, Integer defense, Integer attack_spe, Integer defense_spe, Integer speed) {
+    public Pokemon(int id,String name, String image, Integer hp, Integer attack, Integer defense, Integer attack_spe, Integer defense_spe, Integer speed) {
+        this.id = id;
         this.name = name;
         this.hp = hp;
         this.imageURL = image;
@@ -19,6 +21,12 @@ public class Pokemon {
         this.attack_spe = attack_spe;
         this.defense_spe = defense_spe;
         this.speed = speed;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

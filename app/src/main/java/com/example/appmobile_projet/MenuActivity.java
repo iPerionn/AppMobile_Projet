@@ -1,5 +1,7 @@
 package com.example.appmobile_projet;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,15 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
     private static final int id_frag_pokestreak = 0;
     private static final int id_frag_zoomon = 1;
     private static final int id_frag_pokedex = 2;
+
+
+    Button addInCollection;
+    DBHandler db;
+    @Override
+    public void onAttach(Context activity) {
+        super.onAttach(activity);
+        db = new DBHandler(activity);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
         return inflater.inflate(R.layout.frag_menu, container, false);
@@ -30,6 +41,10 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
         pokestreak.setOnClickListener(this);
         zoomon.setOnClickListener(this);
         pokedex.setOnClickListener(this);
+
+
+        addInCollection = v.findViewById(R.id.addInCollection);
+        addInCollection.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -43,6 +58,8 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
             case R.id.pokedex:
                 joinFragToId(id_frag_pokedex);
                 break;
+            case R.id.addInCollection:
+                db.addRandomPokemon();
         }
     }
     private void joinFragToId(int fragID){
