@@ -37,8 +37,13 @@ public class PokedexActivity extends Fragment {
     
     public List<Pokemon> recupererDonnees(){
         List<Pokemon> b =Arrays.asList(
-                new Pokemon("patate","erererer",4,4,4,4,4,4),
-                new Pokemon("pppp","erererer",4,4,4,4,4,4));
+                new Pokemon("patate","https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",4,4,4,4,4,4),
+                new Pokemon("patate","https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",4,4,4,4,4,4),
+                new Pokemon("patate","https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",4,4,4,4,4,4),
+                new Pokemon("patate","https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png",4,4,4,4,4,4),
+                new Pokemon("patate","https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",4,4,4,4,4,4),
+                new Pokemon("patate","https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png",4,4,4,4,4,4),
+                new Pokemon("pppp","https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",4,4,4,4,4,4));
         return b;
     }
 }

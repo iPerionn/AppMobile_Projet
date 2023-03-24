@@ -1,5 +1,7 @@
 package com.example.appmobile_projet;
 
+import androidx.annotation.NonNull;
+
 public class Pokemon {
     private String name;
     private  String imageURL;
@@ -83,5 +85,17 @@ public class Pokemon {
 
     public void setSpeed(Integer speed) {
         this.speed = speed;
+    }
+
+    @Override
+    public String toString(){
+        String details =
+                " HP : " + "\t"+ this.getHp() +
+                "\n ATT : " + "\t"+ this.getAttack() +
+                "\n DEF : " + "\t"+ this.getDefense() +
+                "\n ATT_SPE : " + "\t"+ this.getAttack_spe() +
+                "\n DEF_SPE : " + "\t"+ this.getDefense_spe() +
+                        "\n SPEED : " + "\t"+ this.getSpeed();
+        return details;
     }
 }
