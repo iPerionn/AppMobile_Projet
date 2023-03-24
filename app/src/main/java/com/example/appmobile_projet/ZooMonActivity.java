@@ -34,11 +34,8 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
     RequestTask requestOnAPI;
     TextView score;
     EditText reponse;
-
     TextView debug;
-
     View context;
-
     int score_numerique;
 
     @Override

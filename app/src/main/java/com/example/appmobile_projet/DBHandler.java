@@ -10,7 +10,6 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Form.db";
 
     public  DBHandler(Context context) { super(context, DATABASE_NAME,null,DATABASE_VERSION);}
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + DBContract.Form.TABLE_NAME + " (" +
@@ -18,7 +17,6 @@ public class DBHandler extends SQLiteOpenHelper {
                 DBContract.Form.COLUMN_NAME + " TEXT)";
         db.execSQL(query);
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String query = "DROP TABLE IF EXISTS " + DBContract.Form.TABLE_NAME;
@@ -32,4 +30,5 @@ public class DBHandler extends SQLiteOpenHelper {
         row.put(DBContract.Form.COLUMN_NAME,name);
         db.insert(DBContract.Form.TABLE_NAME,null,row);
     }
+
 }
