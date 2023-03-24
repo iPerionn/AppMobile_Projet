@@ -8,12 +8,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Toolbar myToolBar;
@@ -24,6 +27,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (!isNetworkConnected()){
+            Snackbar.make(findViewById(android.R.id.content),"L'application ne fonctionnera pas correctement si vous n'êtes pas connecter a internet",Snackbar.LENGTH_LONG).show();
+        }
+
         //Configuration de l'affichage :
         configureDrawerLayout();
         configureNavigationView();
@@ -33,6 +40,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction tf = getSupportFragmentManager().beginTransaction();
         tf.replace(R.id.fragmentG,new MenuActivity()).commit();
     }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+    }
+
     @Override // Association des éléments du ToolBar au sein de son layout
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
