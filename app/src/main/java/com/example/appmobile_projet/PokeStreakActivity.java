@@ -37,6 +37,7 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     TextView question;
     View context;
     int points = 0;
+    int statRetenu = 3;
     DBHandler db;
     @Override
     public void onAttach(Context activity) {
@@ -69,21 +70,22 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
         imageButtonR.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v) {
-                new AlertDialog.Builder(v.getContext()).setMessage(pokemonR.toString()).show();
+                new AlertDialog.Builder(v.getContext()).setMessage(pokemonR.toString()+"\n"+statGetForR).show();
                 return true;
             }
         });
         imageButtonL.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v) {
-                new AlertDialog.Builder(v.getContext()).setMessage(pokemonL.toString()).show();
+                new AlertDialog.Builder(v.getContext()).setMessage(pokemonL.toString()+"\n"+statGetForL).show();
                 return true;
             }
         });
     }
+    int statGetForL = 0;
+    int statGetForR = 0;
     @Override // Appel lors d'un choix de l'utilisateur : instancie le score et lance le nouvelle affichage
     public void onClick(View view){
-        setStats();
         try {
             switch (view.getId()){
                 case R.id.img_pokemonL:
@@ -111,15 +113,13 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
             }
             pokemonL = null;
             pokemonR = null;
+            statRetenu = (int) (Math.random() *5)+1;
             setPokemons();
-            String newRes = "Votre série de victoire est de : "+points;
-            score.setText(newRes);
+            score.setText("Votre série de victoire est de : "+points);
         }catch (Exception e){
             Snackbar.make(context,"Attention vous avez cliquer trop vite ! Cela peut entrainer des erreurs",Snackbar.LENGTH_LONG).show();
         }
     }
-    int statGetForL = 0;
-    int statGetForR = 0;
     public Pokemon compare(){ // Compare en fonction d'une statistique choisi aléatoirement les 2 pokemons et retourne celui en possédant le plus
         if (statGetForL == statGetForR){
             return null;
@@ -128,12 +128,6 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
         }else {
             return pokemonR;
         }
-    }
-    public void setStats(){
-        int random = (int) (Math.random() * 5) + 1;
-        statGetForL = pokemonL.getCarctFromInt(random);
-        statGetForR = pokemonR.getCarctFromInt(random);
-        showNewQuestion(random);
     }
     public void showNewQuestion(int i){
         String resp = "Probléme d'affichage :/";
@@ -223,12 +217,15 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
             if(pokemonL == null){
                 pokemonL =pokemon;
                 textViewL.setText(pokemonL.getName());
+                statGetForL = pokemonL.getCarctFromInt(statRetenu);
                 Picasso.get()
                         .load(pokemonL.getImageURL())
                         .into(imageButtonL);
             } else if (pokemonR == null) {
                 pokemonR =pokemon;
                 textViewR.setText(pokemonR.getName());
+                statGetForR = pokemonR.getCarctFromInt(statRetenu);
+                showNewQuestion(statRetenu);
                 Picasso.get()
                         .load(pokemonR.getImageURL())
                         .into(imageButtonR);
