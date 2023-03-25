@@ -1,5 +1,7 @@
 package com.example.appmobile_projet;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,7 +39,12 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
     TextView debug;
     View context;
     int score_numerique;
-
+    DBHandler db;
+    @Override
+    public void onAttach(Context activity) {
+        super.onAttach(activity);
+        db = new DBHandler(activity);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
         return inflater.inflate(R.layout.frag_zoomon, container, false);
@@ -74,6 +81,14 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
             } else {
                 verifRéponse(reponseText);
                 chargementNouveauPokemon();
+                if (score_numerique % 5 == 0 && score_numerique != 0 ) {
+                    db.addRandomPokemon();
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Félicitations !")
+                            .setMessage("Un nouveau pokémon a été ajouté à votre collection n'hésitez pas à faire un tours")
+                            .setMessage("Un nouveau pokémon a été ajouté à votre collection n'hésitez pas à faire un tours")
+                            .show();
+                }
             }
         }
     }

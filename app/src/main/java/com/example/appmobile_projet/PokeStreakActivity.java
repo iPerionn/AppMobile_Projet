@@ -1,5 +1,7 @@
 package com.example.appmobile_projet;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +37,12 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     TextView question;
     View context;
     int points = 0;
+    DBHandler db;
+    @Override
+    public void onAttach(Context activity) {
+        super.onAttach(activity);
+        db = new DBHandler(activity);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
         return inflater.inflate(R.layout.frag_pokestreak, container, false);
@@ -46,22 +54,36 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
         context = getActivity().findViewById(android.R.id.content);
         score = view.findViewById(R.id.score);
         question = view.findViewById(R.id.qPokestreak);
-        // création du pokemon de gauche :
-        requestOnAPI = new RequestTask();
+        //création des 2 pokémons  :
+        setPokemons();
+        //association des vues du pokemon de gauche :
         textViewL = view.findViewById(R.id.name_pokemonL);
         imageButtonL = view.findViewById(R.id.img_pokemonL);
-        requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
-        //création du pokemon de droite :
-        requestOnAPI = new RequestTask();
+        //association des vues du pokemon de droite :
         textViewR = view.findViewById(R.id.name_pokemonR);
         imageButtonR = view.findViewById(R.id.img_pokemonR);
-        requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
         //ajout des évenements lié au bouttons
         imageButtonL.setOnClickListener(this);
         imageButtonR.setOnClickListener(this);
+
+        imageButtonR.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v) {
+                new AlertDialog.Builder(v.getContext()).setMessage(pokemonR.toString()).show();
+                return true;
+            }
+        });
+        imageButtonL.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v) {
+                new AlertDialog.Builder(v.getContext()).setMessage(pokemonL.toString()).show();
+                return true;
+            }
+        });
     }
     @Override // Appel lors d'un choix de l'utilisateur : instancie le score et lance le nouvelle affichage
     public void onClick(View view){
+        setStats();
         try {
             switch (view.getId()){
                 case R.id.img_pokemonL:
@@ -79,12 +101,17 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
                     }
                     break;
             }
+            if (points % 5 == 0 && points != 0 ) {
+                db.addRandomPokemon();
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Félicitations !")
+                        .setMessage("Un nouveau pokémon a été ajouté à votre collection n'hésitez pas à faire un tours")
+                        .setMessage("Un nouveau pokémon a été ajouté à votre collection n'hésitez pas à faire un tours")
+                        .show();
+            }
             pokemonL = null;
             pokemonR = null;
-            requestOnAPI = new RequestTask();
-            requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
-            requestOnAPI = new RequestTask();
-            requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
+            setPokemons();
             String newRes = "Votre série de victoire est de : "+points;
             score.setText(newRes);
         }catch (Exception e){
@@ -94,31 +121,18 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     int statGetForL = 0;
     int statGetForR = 0;
     public Pokemon compare(){ // Compare en fonction d'une statistique choisi aléatoirement les 2 pokemons et retourne celui en possédant le plus
-        if (statGetForR ==0 && statGetForL ==0){
-            statGetForR = pokemonR.getDefense();
-            statGetForL = pokemonL.getDefense();
-        }
         if (statGetForL == statGetForR){
-            setStats();
             return null;
         } else if (statGetForL > statGetForR) {
-            setStats();
             return pokemonL;
         }else {
-            setStats();
             return pokemonR;
         }
     }
     public void setStats(){
-        List<Integer> statSelectorForL =
-                Arrays.asList(pokemonL.getAttack(),pokemonL.getAttack_spe(),pokemonL.getDefense_spe(),
-                        pokemonL.getDefense(),pokemonL.getHp(),pokemonL.getSpeed());
-        List<Integer> statSelectorForR =
-                Arrays.asList(pokemonR.getAttack(),pokemonR.getAttack_spe(),pokemonR.getDefense_spe(),
-                        pokemonR.getDefense(),pokemonR.getHp(),pokemonR.getSpeed());
         int random = (int) (Math.random() * 5) + 1;
-        statGetForL = statSelectorForL.get(random);
-        statGetForR = statSelectorForR.get(random);
+        statGetForL = pokemonL.getCarctFromInt(random);
+        statGetForR = pokemonR.getCarctFromInt(random);
         showNewQuestion(random);
     }
     public void showNewQuestion(int i){
@@ -143,6 +157,12 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
                 resp = "Quel Pokemon posséde le plus de vitesse  ?";
         }
         question.setText(resp);
+    }
+    private void setPokemons(){
+        requestOnAPI = new RequestTask();
+        requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
+        requestOnAPI = new RequestTask();
+        requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
     }
     @Override
     public void onDestroy() {
@@ -216,4 +236,3 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
         }
     }
 }
-

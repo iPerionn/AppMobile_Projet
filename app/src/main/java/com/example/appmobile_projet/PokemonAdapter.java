@@ -17,7 +17,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<ViewHolderPokemon> {
             this.pokemons = pokemons;
         }
     }
-
     @NonNull
     @Override
     public ViewHolderPokemon onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -25,13 +24,11 @@ public class PokemonAdapter extends RecyclerView.Adapter<ViewHolderPokemon> {
         View view = inflater.inflate(R.layout.pokemon_layout,parent,false);
         return new ViewHolderPokemon(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPokemon holder, int position) {
         Pokemon pokemon = pokemons.get(position);
         holder.afficher(pokemon);
     }
-
     @Override
     public int getItemCount() {
         if(pokemons != null) return pokemons.size();

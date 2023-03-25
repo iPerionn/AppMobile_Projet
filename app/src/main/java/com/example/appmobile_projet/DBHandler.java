@@ -30,7 +30,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public boolean addRandomPokemon(){
         requestTask = new RequestTask();
         List<Pokemon> collection =selectAll();
-        if (collection.size() != 152) {
+        if (collection.size() != 151) {
             Boolean pokemonIsInPokedex = false;
             int id;
             do {
