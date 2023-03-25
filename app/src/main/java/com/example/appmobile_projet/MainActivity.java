@@ -3,6 +3,7 @@ package com.example.appmobile_projet;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -64,13 +67,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.toolbar_values, menu);
         return true;
     }
+
+
+
     @Override //Traitement des actions du ToolBar
     public boolean onOptionsItemSelected(MenuItem item) {
         //ouvre le menu de navigation :
+        /*
         if (item.getItemId() == R.id.openNav) {
             drawerLayout.openDrawer(GravityCompat.START);
             return true;
         }
+        */
         if (item.getItemId() == R.id.logoApp) {
             joinFragToId(id_frag_menu);
         }
@@ -131,7 +139,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //ToolBar :
     private void configureToolBar(){
         myToolBar = findViewById(R.id.tool_bar);
+
+        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.menu_bar2);
+        myToolBar.setNavigationIcon(drawable);
+
         setSupportActionBar(myToolBar);
+        myToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
     }
     //DrawerLayout :
     private void configureDrawerLayout(){
