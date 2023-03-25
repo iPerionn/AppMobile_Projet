@@ -34,9 +34,6 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
         zoomon.setOnClickListener(this);
         pokedex.setOnClickListener(this);
 
-        addInCollection = v.findViewById(R.id.addInCollection);
-        addInCollection.setOnClickListener(this);
-
         zoomon.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
