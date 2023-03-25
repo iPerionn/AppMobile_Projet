@@ -52,6 +52,7 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
             public boolean onLongClick(View v) {
                 new AlertDialog.Builder(v.getContext())
                         .setTitle("ZooMon")
+                        .setIcon(R.drawable.zoom)
                         .setMessage("Info du jeu : \n\nDevinez le nom du pokémon qui s'affiche et tous les 5 points vous débloquez un nouveau pokemon dans votre pokedex")
                         .show();
                 return true;
@@ -63,6 +64,7 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
             public boolean onLongClick(View v) {
                 new AlertDialog.Builder(v.getContext())
                         .setTitle("Pokestreak")
+                        .setIcon(R.drawable.choice)
                         .setMessage("Info du jeu : \n\nDevinez le pokemon qui a le plus de stat dans la catéorie définie : HP, ATT, DEF, ... \nTous les 5 points vous débloquerez un nouveau pokemon dans votre pokedex.")
                         .show();
                 return true;
@@ -74,6 +76,7 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
             public boolean onLongClick(View v) {
                 new AlertDialog.Builder(v.getContext())
                         .setTitle("Pokedex")
+                        .setIcon(R.drawable.pokedex)
                         .setMessage("Info : \n\nDécouvrez la liste des pokemons que vous avez débloqué")
                         .show();
                 return true;
