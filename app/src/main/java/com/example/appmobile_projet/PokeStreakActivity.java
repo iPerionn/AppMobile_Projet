@@ -2,6 +2,7 @@ package com.example.appmobile_projet;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     int points = 0;
     int statRetenu = 3;
     DBHandler db;
+    private MediaPlayer mp;
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -88,6 +90,8 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
                     break;
             }
             if (points % 5 == 0 && points != 0 && db.addRandomPokemon()) {
+                mp = MediaPlayer.create(view.getContext(), R.raw.add_new);
+                mp.start();
                 new AlertDialog.Builder(getContext())
                         .setTitle("Félicitations !")
                         .setMessage("Un nouveau pokémon a été ajouté à votre collection n'hésitez pas à faire un tours")
