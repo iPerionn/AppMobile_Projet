@@ -3,6 +3,7 @@ package com.example.appmobile_projet;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -25,9 +28,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment frag_menu;
     private Fragment frag_pokestreak;
     private Fragment frag_zoomon;
+
+    private Fragment frag_pokedex;
     private static final int id_frag_menu = 0;
     private static final int id_frag_pokestreak = 1;
     private static final int id_frag_zoomon = 2;
+
+    private static final int id_frag_pokedex = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +67,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.toolbar_values, menu);
         return true;
     }
+
+
+
     @Override //Traitement des actions du ToolBar
     public boolean onOptionsItemSelected(MenuItem item) {
         //ouvre le menu de navigation :
+        /*
         if (item.getItemId() == R.id.openNav) {
             drawerLayout.openDrawer(GravityCompat.START);
             return true;
         }
+        */
         if (item.getItemId() == R.id.logoApp) {
             joinFragToId(id_frag_menu);
         }
@@ -92,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.btnJeu2:
                 joinFragToId(id_frag_zoomon);
                 break;
+            case R.id.pokedex:
+                joinFragToId(id_frag_pokedex);
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -112,6 +127,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(frag_zoomon == null) frag_zoomon = new ZooMonActivity();
                 changeFragment(frag_zoomon);
                 break;
+
+            case id_frag_pokedex:
+                if(frag_pokedex == null) frag_pokedex = new PokedexActivity();
+                changeFragment(frag_pokedex);
+                break;
         }
     }
 
@@ -119,7 +139,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //ToolBar :
     private void configureToolBar(){
         myToolBar = findViewById(R.id.tool_bar);
+
+        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.menu_bar2);
+        myToolBar.setNavigationIcon(drawable);
+
         setSupportActionBar(myToolBar);
+        myToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
     }
     //DrawerLayout :
     private void configureDrawerLayout(){
