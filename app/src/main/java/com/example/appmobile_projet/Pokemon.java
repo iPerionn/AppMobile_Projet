@@ -97,17 +97,17 @@ public class Pokemon {
 
     public int getCarctFromInt(int i){
         switch (i) {
-            case 0 :
-                return getAttack();
             case 1 :
-                return getAttack_spe();
+                return getAttack();
             case 2 :
-                return getDefense_spe();
+                return getAttack_spe();
             case 3 :
-                return getDefense();
+                return getDefense_spe();
             case 4 :
-                return getHp();
+                return getDefense();
             case 5 :
+                return getHp();
+            case 6 :
                 return getSpeed();
         }
         return getDefense();

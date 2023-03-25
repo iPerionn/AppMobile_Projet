@@ -66,27 +66,11 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
         //ajout des évenements lié au bouttons
         imageButtonL.setOnClickListener(this);
         imageButtonR.setOnClickListener(this);
-
-        imageButtonR.setOnLongClickListener(new View.OnLongClickListener(){
-            @Override
-            public boolean onLongClick(View v) {
-                new AlertDialog.Builder(v.getContext()).setMessage(pokemonR.toString()+"\n"+statGetForR).show();
-                return true;
-            }
-        });
-        imageButtonL.setOnLongClickListener(new View.OnLongClickListener(){
-            @Override
-            public boolean onLongClick(View v) {
-                new AlertDialog.Builder(v.getContext()).setMessage(pokemonL.toString()+"\n"+statGetForL).show();
-                return true;
-            }
-        });
     }
     int statGetForL = 0;
     int statGetForR = 0;
     @Override // Appel lors d'un choix de l'utilisateur : instancie le score et lance le nouvelle affichage
     public void onClick(View view){
-        try {
             switch (view.getId()){
                 case R.id.img_pokemonL:
                     if (compare() == pokemonL || compare() == null){
@@ -103,22 +87,17 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
                     }
                     break;
             }
-            if (points % 5 == 0 && points != 0 ) {
-                db.addRandomPokemon();
+            if (points % 5 == 0 && points != 0 && db.addRandomPokemon()) {
                 new AlertDialog.Builder(getContext())
                         .setTitle("Félicitations !")
-                        .setMessage("Un nouveau pokémon a été ajouté à votre collection n'hésitez pas à faire un tours")
                         .setMessage("Un nouveau pokémon a été ajouté à votre collection n'hésitez pas à faire un tours")
                         .show();
             }
             pokemonL = null;
             pokemonR = null;
-            statRetenu = (int) (Math.random() *5)+1;
+            statRetenu = (int) (Math.random() *6)+1;
             setPokemons();
             score.setText("Votre série de victoire est de : "+points);
-        }catch (Exception e){
-            Snackbar.make(context,"Attention vous avez cliquer trop vite ! Cela peut entrainer des erreurs",Snackbar.LENGTH_LONG).show();
-        }
     }
     public Pokemon compare(){ // Compare en fonction d'une statistique choisi aléatoirement les 2 pokemons et retourne celui en possédant le plus
         if (statGetForL == statGetForR){
@@ -132,22 +111,22 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     public void showNewQuestion(int i){
         String resp = "Probléme d'affichage :/";
         switch (i){
-            case 0 :
+            case 1 :
                 resp = "Quel Pokemon posséde le plus d'attaque ?";
                 break;
-            case 1 :
+            case 2 :
                 resp = "Quel Pokemon posséde le plus d'attaque spécial ?";
                 break;
-            case 2 :
+            case 3 :
                 resp = "Quel Pokemon posséde le plus de défense spéciale ?";
                 break;
-            case 3 :
+            case 4 :
                 resp = "Quel Pokemon posséde le plus de défense  ?";
                 break;
-            case 4 :
+            case 5 :
                 resp = "Quel Pokemon posséde le plus d'hp ?";
                 break;
-            case 5 :
+            case 6 :
                 resp = "Quel Pokemon posséde le plus de vitesse  ?";
         }
         question.setText(resp);

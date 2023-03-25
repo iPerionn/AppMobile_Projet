@@ -36,7 +36,6 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
     RequestTask requestOnAPI;
     TextView score;
     EditText reponse;
-    TextView debug;
     View context;
     int score_numerique;
     DBHandler db;
@@ -58,7 +57,6 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
         score = view.findViewById(R.id.zoomon_score);
         score_numerique = 0;
         reponse = view.findViewById(R.id.reponse);
-        debug = view.findViewById(R.id.debug);
         requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
         view.findViewById(R.id.refresh).setOnClickListener(this);
     }
@@ -81,11 +79,9 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
             } else {
                 verifRéponse(reponseText);
                 chargementNouveauPokemon();
-                if (score_numerique % 5 == 0 && score_numerique != 0 ) {
-                    db.addRandomPokemon();
+                if (score_numerique % 5 == 0 && score_numerique != 0 && db.addRandomPokemon()) {
                     new AlertDialog.Builder(getContext())
                             .setTitle("Félicitations !")
-                            .setMessage("Un nouveau pokémon a été ajouté à votre collection n'hésitez pas à faire un tours")
                             .setMessage("Un nouveau pokémon a été ajouté à votre collection n'hésitez pas à faire un tours")
                             .show();
                 }
@@ -149,7 +145,6 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
                 Picasso.get()
                         .load(decodeURL(toDecode))
                         .into(zoomon_img);
-                debug.setText(nomPokemon);
                 score.setText(String.valueOf(score_numerique));
                 reponse.setText("");
             } catch (Exception e) {

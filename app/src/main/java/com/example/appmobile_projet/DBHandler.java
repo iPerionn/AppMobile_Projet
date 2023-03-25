@@ -30,24 +30,19 @@ public class DBHandler extends SQLiteOpenHelper {
     public boolean addRandomPokemon(){
         requestTask = new RequestTask();
         List<Pokemon> collection =selectAll();
-        if (collection.size() != 151) {
-            Boolean pokemonIsInPokedex = false;
-            int id;
+        if (collection.size() < 151) {
+            Integer id;
             do {
                 id = (int) ((Math.random()* 151)+1);
-                for (Pokemon pokemon : collection){
-                    if (pokemon.getId() == id){
-                        pokemonIsInPokedex = true;
-                        break;
-                    }
-                    pokemonIsInPokedex = false;
-                }
-            }while (pokemonIsInPokedex);
+            }while (contains(collection,id));
             requestTask.execute(String.valueOf(id));
             return true;
         }else {
             return false;
         }
+    }
+    public boolean contains(List<Pokemon> list, Integer i){
+        return list.stream().anyMatch(pokemon -> ((Integer) pokemon.getId()).equals(i));
     }
     @Override
     public void onCreate(SQLiteDatabase db) {

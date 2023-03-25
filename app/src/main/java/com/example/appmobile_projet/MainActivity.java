@@ -1,6 +1,7 @@
 package com.example.appmobile_projet;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -10,9 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,12 +32,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment frag_menu;
     private Fragment frag_pokestreak;
     private Fragment frag_zoomon;
-
     private Fragment frag_pokedex;
     private static final int id_frag_menu = 0;
     private static final int id_frag_pokestreak = 1;
     private static final int id_frag_zoomon = 2;
-
     private static final int id_frag_pokedex = 3;
 
     @Override
@@ -42,7 +44,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         if (!isNetworkConnected()){
-            Snackbar.make(findViewById(android.R.id.content),"L'application ne fonctionnera pas correctement si vous n'êtes pas connecter a internet",Snackbar.LENGTH_LONG).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Connect to wifi or quit")
+                    .setCancelable(false)
+                    .setPositiveButton("Connect to WIFI", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                        }
+                    })
+                    .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
 
         //Configuration de l'affichage :
@@ -56,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
@@ -68,17 +83,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
-
     @Override //Traitement des actions du ToolBar
     public boolean onOptionsItemSelected(MenuItem item) {
-        //ouvre le menu de navigation :
-        /*
-        if (item.getItemId() == R.id.openNav) {
-            drawerLayout.openDrawer(GravityCompat.START);
-            return true;
-        }
-        */
         if (item.getItemId() == R.id.logoApp) {
             joinFragToId(id_frag_menu);
         }
