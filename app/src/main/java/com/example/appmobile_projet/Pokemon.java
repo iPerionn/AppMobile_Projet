@@ -1,6 +1,9 @@
 package com.example.appmobile_projet;
 
+import androidx.annotation.NonNull;
+
 public class Pokemon {
+    private int id;
     private String name;
     private  String imageURL;
     private Integer hp;
@@ -10,7 +13,8 @@ public class Pokemon {
     private Integer defense_spe;
     private Integer speed;
 
-    public Pokemon(String name, String image, Integer hp, Integer attack, Integer defense, Integer attack_spe, Integer defense_spe, Integer speed) {
+    public Pokemon(int id,String name, String image, Integer hp, Integer attack, Integer defense, Integer attack_spe, Integer defense_spe, Integer speed) {
+        this.id = id;
         this.name = name;
         this.hp = hp;
         this.imageURL = image;
@@ -19,6 +23,12 @@ public class Pokemon {
         this.attack_spe = attack_spe;
         this.defense_spe = defense_spe;
         this.speed = speed;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -83,5 +93,17 @@ public class Pokemon {
 
     public void setSpeed(Integer speed) {
         this.speed = speed;
+    }
+
+    @Override
+    public String toString(){
+        String details =
+                " HP : " + "\t"+ this.getHp() +
+                "\n ATT : " + "\t"+ this.getAttack() +
+                "\n DEF : " + "\t"+ this.getDefense() +
+                "\n ATT_SPE : " + "\t"+ this.getAttack_spe() +
+                "\n DEF_SPE : " + "\t"+ this.getDefense_spe() +
+                        "\n SPEED : " + "\t"+ this.getSpeed();
+        return details;
     }
 }

@@ -22,15 +22,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar myToolBar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-
     private Fragment frag_menu;
     private Fragment frag_pokestreak;
-
     private Fragment frag_zoomon;
-
     private static final int id_frag_menu = 0;
     private static final int id_frag_pokestreak = 1;
-
     private static final int id_frag_zoomon = 2;
 
     @Override

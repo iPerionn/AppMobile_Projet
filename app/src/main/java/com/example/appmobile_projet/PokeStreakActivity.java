@@ -183,7 +183,7 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
         private Pokemon decodePokemon(JSONObject jso) throws Exception {
             Pokemon result;
             JSONObject stats = jso.getJSONObject("stats");
-            result = new Pokemon(jso.getString("name"), jso.getString("image"), Integer.parseInt(stats.getString("HP")),
+            result = new Pokemon(jso.getInt("id"),jso.getString("name"), jso.getString("image"), stats.getInt("HP"),
                     stats.getInt("attack"), stats.getInt("defense"), stats.getInt("special_attack"),
                     stats.getInt("special_defense"), stats.getInt("speed"));
             return result;
