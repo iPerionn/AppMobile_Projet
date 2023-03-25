@@ -9,11 +9,17 @@
         android:icon="@drawable/home"/>
     <item
         android:id="@+id/btnJeu1"
-        android:title="@string/btnJeu1"
+        android:title="@string/pokeStreak"
         android:icon="@drawable/choice"/>
     <item
         android:id="@+id/btnJeu2"
-        android:title="@string/btnJeu2"
+        android:title="@string/zoomon"
         android:icon="@drawable/zoom"/>
+
+    <item
+        android:id="@+id/pokedex"
+        android:title="@string/pokedex"
+        android:icon="@drawable/pokedex"/>
+
 
 </menu>
