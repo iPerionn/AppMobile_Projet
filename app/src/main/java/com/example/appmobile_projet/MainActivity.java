@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int id_frag_pokestreak = 1;
     private static final int id_frag_zoomon = 2;
     private static final int id_frag_pokedex = 3;
+
+    private MediaPlayer mp ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         configureToolBar();
         //Affichage de l'écran de menu au lancement de l'application :
         joinFragToId(id_frag_menu);
+
+        //Musique de fond
+        mp = MediaPlayer.create(this, R.raw.background_music);
+        mp.setLooping(true);
+        mp.start();
+
     }
 
     private boolean isNetworkConnected() {
