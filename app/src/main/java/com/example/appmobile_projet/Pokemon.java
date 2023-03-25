@@ -95,15 +95,32 @@ public class Pokemon {
         this.speed = speed;
     }
 
+    public int getCarctFromInt(int i){
+        switch (i) {
+            case 0 :
+                return getAttack();
+            case 1 :
+                return getAttack_spe();
+            case 2 :
+                return getDefense_spe();
+            case 3 :
+                return getDefense();
+            case 4 :
+                return getHp();
+            case 5 :
+                return getSpeed();
+        }
+        return getDefense();
+    }
     @Override
     public String toString(){
         String details =
-                " HP : " + "\t"+ this.getHp() +
-                "\n ATT : " + "\t"+ this.getAttack() +
-                "\n DEF : " + "\t"+ this.getDefense() +
-                "\n ATT_SPE : " + "\t"+ this.getAttack_spe() +
-                "\n DEF_SPE : " + "\t"+ this.getDefense_spe() +
-                        "\n SPEED : " + "\t"+ this.getSpeed();
+                " Points de vie : " + "\t"+ this.getHp() +
+                "\n Attaque : " + "\t"+ this.getAttack() +
+                "\n Défense : " + "\t"+ this.getDefense() +
+                "\n Attaque spéciale : " + "\t"+ this.getAttack_spe() +
+                "\n Défense spéciale : " + "\t"+ this.getDefense_spe() +
+                        "\n Vitesse : " + "\t"+ this.getSpeed();
         return details;
     }
 }

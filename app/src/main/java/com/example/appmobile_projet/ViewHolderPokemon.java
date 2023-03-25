@@ -16,7 +16,6 @@ public class ViewHolderPokemon extends RecyclerView.ViewHolder {
         super(itemView);
         img = (itemView.findViewById(R.id.pokedex_img));
         name = (itemView.findViewById(R.id.name));
-
         itemView.setOnClickListener(new View.OnClickListener()
         {
             @Override
