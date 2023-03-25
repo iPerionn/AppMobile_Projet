@@ -1,6 +1,7 @@
 package com.example.appmobile_projet;
 
 import android.app.AlertDialog;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ public class ViewHolderPokemon extends RecyclerView.ViewHolder {
     private final TextView name;
     private final ImageView img;
     private Pokemon pokemon;
+    private MediaPlayer best_unlocking;
     public ViewHolderPokemon(final View itemView) {
         super(itemView);
         img = (itemView.findViewById(R.id.pokedex_img));
@@ -24,6 +26,10 @@ public class ViewHolderPokemon extends RecyclerView.ViewHolder {
                         .setTitle(pokemon.getName())
                         .setMessage(pokemon.toString())
                         .show();
+                if (pokemon.getId() == 151){
+                    best_unlocking = MediaPlayer.create(view.getContext(), R.raw.best_unlocking);
+                    best_unlocking.start();
+                }
             }
         });
     }
