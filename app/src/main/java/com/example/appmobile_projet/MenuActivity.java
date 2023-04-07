@@ -1,12 +1,11 @@
 package com.example.appmobile_projet;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +17,7 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
     private Fragment frag_pokestreak;
     private Fragment frag_zoomon;
     private Fragment frag_pokedex;
+    private WebView actus;
     private static final int id_frag_pokestreak = 0;
     private static final int id_frag_zoomon = 1;
     private static final int id_frag_pokedex = 2;
@@ -33,7 +33,10 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
         pokestreak.setOnClickListener(this);
         zoomon.setOnClickListener(this);
         pokedex.setOnClickListener(this);
+        actus = v.findViewById(R.id.actu);
 
+        actus.loadUrl("https://www.pokemon.com/fr/actus-pokemon");
+        actus.getSettings().setJavaScriptEnabled(true);
         zoomon.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

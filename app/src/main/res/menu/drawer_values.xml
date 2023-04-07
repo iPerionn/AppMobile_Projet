@@ -20,6 +20,9 @@
         android:id="@+id/pokedex"
         android:title="@string/pokedex"
         android:icon="@drawable/pokedex"/>
-
+    <item
+        android:id="@+id/song"
+        android:title="@string/musique"
+        android:icon="@drawable/volume_off"/>
 
 </menu>

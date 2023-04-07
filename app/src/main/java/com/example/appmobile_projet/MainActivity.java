@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int id_frag_pokestreak = 1;
     private static final int id_frag_zoomon = 2;
     private static final int id_frag_pokedex = 3;
-
+    private boolean musiqueOn = true;
     private MediaPlayer mp ;
 
     @Override
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mp.start();
 
     }
-
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
@@ -122,9 +121,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.pokedex:
                 joinFragToId(id_frag_pokedex);
                 break;
+            case R.id.song:
+                onOffVolume(item);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void onOffVolume(MenuItem item){
+        if(mp.isPlaying()){
+            item.setIcon(R.drawable.volume_on);
+            item.setTitle("Volume On");
+            mp.stop();
+        }else{
+            mp = MediaPlayer.create(this, R.raw.background_music);
+            item.setIcon(R.drawable.volume_off);
+            item.setTitle("Volume Off");
+            mp.start();
+        }
     }
 
             //ici on lie un fragment créer à un id fixe puis on fait appel a la methode pour les afficher

@@ -5,12 +5,10 @@
     <string name="pokeStreak">PokeStreak</string>
     <string name="pokedex">PokeDex</string>
     <string name="zoomon">ZooMon</string>
-    <string name="profile">Profile</string>
+    <string name="musique">Volume off</string>
 
     <!-- String pour le menu navigation -->
     <string name="btnMenu">Menu</string>
-    <string name="btnJeu1">Mini Jeu 1</string>
-    <string name="btnJeu2">Mini jeu 2</string>
 
     <!-- String etat du menu navigation -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
