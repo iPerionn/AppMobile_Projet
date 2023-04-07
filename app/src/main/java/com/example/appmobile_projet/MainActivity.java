@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+            // Vérification lors de la création si l'utilisateur est bien connecté à un réseau
         if (!isNetworkConnected()){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Connect to wifi or quit")
@@ -78,11 +78,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mp.start();
 
     }
+    /**
+     *  Retourne un booléen si l'utilisateur est connectée à un réseaux
+     * */
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
+    /**
+     *
+     * @param menu The options menu in which you place your items.
+     *
+     * @return boolean
+     */
     @Override // Association des éléments du ToolBar au sein de son layout
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -91,6 +100,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /**
+     *
+     * @param item The menu item that was selected.
+     *
+     * @return boolean
+     */
     @Override //Traitement des actions du ToolBar
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.logoApp) {
@@ -98,6 +113,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
+
+    /**
+     * Permet un retour du drawer menu
+     */
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -106,6 +125,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
+    /**
+     *
+     * @param item The selected item
+     * @return boolean
+     */
     @Override //Traitement des actions du NavigationView
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -127,6 +152,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    /**
+     * Gestion de la musique de fond
+     * @param item
+     */
     private void onOffVolume(MenuItem item){
         if(mp.isPlaying()){
             item.setIcon(R.drawable.volume_on);
@@ -140,8 +170,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-            //ici on lie un fragment créer à un id fixe puis on fait appel a la methode pour les afficher
-    private void joinFragToId(int fragID){
+    /**
+     *
+     * @param fragID
+     *
+     */
+    private void joinFragToId(int fragID){ //ici on lie un fragment créer à un id fixe puis on fait appel a la methode pour les afficher
         switch (fragID){
             case id_frag_menu:
                 if(frag_menu == null) frag_menu = new MenuActivity();
@@ -163,8 +197,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    //Configuration des éléments du layout :
-    //ToolBar :
+    /**
+     * Configuration des éléments du layout
+     */
+    /**
+     * ToolBar :
+     */
     private void configureToolBar(){
         myToolBar = findViewById(R.id.tool_bar);
 
@@ -179,20 +217,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-    //DrawerLayout :
+
+    /**
+     * DrawerLayout
+     */
     private void configureDrawerLayout(){
         drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, myToolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
-    //NavigationView :
+
+    /**
+     * NavigationView
+     */
     private void configureNavigationView(){
         navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    // Methode pour changer le fragment afficher part un autre :
+    /**
+     * Permet le changement de fragments
+     * @param fragment
+     */
     private void changeFragment(Fragment fragment){
         if(!fragment.isVisible()){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentG, fragment).commit();

@@ -21,12 +21,19 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+    /**
+     * Classe de gestion de la base de données
+     * */
 public class DBHandler extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Form.db";
     private Pokemon pokemonInsert;
     RequestTask requestTask;
     public  DBHandler(Context context) { super(context, DATABASE_NAME,null,DATABASE_VERSION);}
+        /**
+         * Ajout d'un pokémon aléatoire dans la base de donnée via une requète sur API
+         * retourne True si le pokémon a bien été ajouté
+         * */
     public boolean addRandomPokemon(){
         requestTask = new RequestTask();
         List<Pokemon> collection =selectAll();
@@ -41,9 +48,15 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
         }
     }
+        /**
+         * Retourne un booléen si le pokémon est dans la liste
+         * */
     public boolean contains(List<Pokemon> list, Integer i){
         return list.stream().anyMatch(pokemon -> ((Integer) pokemon.getId()).equals(i));
     }
+        /**
+         * Création de la base de donnée lors de la création de l'application
+         * */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + DBContract.Form.TABLE_NAME + " (" +
@@ -58,12 +71,18 @@ public class DBHandler extends SQLiteOpenHelper {
                 DBContract.Form.COLUMN_SPEED + " INTEGER)";
         db.execSQL(query);
     }
+        /**
+         * Met à jour la base de donnée
+         * */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String query = "DROP TABLE IF EXISTS " + DBContract.Form.TABLE_NAME;
         db.execSQL(query);
         onCreate(db);
     }
+        /**
+         * Insertion d'un pokémon dans la base de donnée
+         * */
     public void insertPokemon(String id, String name, String image, String hp, String attack, String defense, String attackspe, String defensespe, String speed){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues row = new ContentValues();
@@ -78,6 +97,9 @@ public class DBHandler extends SQLiteOpenHelper {
         row.put(DBContract.Form.COLUMN_SPEED,speed);
         db.insert(DBContract.Form.TABLE_NAME,null,row);
     }
+        /**
+         * Retourne une liste de tout les  pokémons contenus dans la base de données
+         * */
     public List<Pokemon> selectAll() {
         List<Pokemon> responses = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -113,6 +135,9 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return responses;
     }
+        /**
+         * Classe asynchrone qui fait le lien entre l'API et la base de données 
+         * */
     private class RequestTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... number) {
             return requeteFindPokemonByNumber(number[0]);

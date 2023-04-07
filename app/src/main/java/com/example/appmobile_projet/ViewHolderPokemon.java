@@ -14,6 +14,11 @@ public class ViewHolderPokemon extends RecyclerView.ViewHolder {
     private final ImageView img;
     private Pokemon pokemon;
     private MediaPlayer best_unlocking;
+
+    /**
+     * Ajout de la gestion d'événement dans le recycleur view
+     * @param itemView
+     */
     public ViewHolderPokemon(final View itemView) {
         super(itemView);
         img = (itemView.findViewById(R.id.pokedex_img));
@@ -33,6 +38,11 @@ public class ViewHolderPokemon extends RecyclerView.ViewHolder {
             }
         });
     }
+
+    /**
+     * Affichage des images associée aux pokémons par leur URL
+     * @param pokemon
+     */
     public void afficher(Pokemon pokemon){
         this.pokemon = pokemon;
         name.setText(pokemon.getName());

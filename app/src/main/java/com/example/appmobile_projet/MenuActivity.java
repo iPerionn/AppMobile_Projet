@@ -21,10 +21,29 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
     private static final int id_frag_pokestreak = 0;
     private static final int id_frag_zoomon = 1;
     private static final int id_frag_pokedex = 2;
+
+    /**
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstance If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return l'affichage du fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
         return inflater.inflate(R.layout.frag_menu, container, false);
     }
+    /**
+     *
+     * @param v The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstance If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     @Override
     public void onViewCreated(View v, Bundle savedInstance){
         pokestreak = v.findViewById(R.id.pokeStreak);
@@ -37,6 +56,9 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
 
         actus.loadUrl("https://www.pokemon.com/fr/actus-pokemon");
         actus.getSettings().setJavaScriptEnabled(true);
+        /**
+         *  Affichage détailler des régles lors d'un appuis long sur les différents bouttons
+         */
         zoomon.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -73,6 +95,11 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
             }
         });
     }
+
+    /**
+     *
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -87,6 +114,11 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+
+    /**
+     *
+     * @param fragID
+     */
     private void joinFragToId(int fragID){
         switch (fragID){
             case id_frag_pokestreak:
@@ -103,6 +135,11 @@ public class MenuActivity extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+
+    /**
+     * permet le changement de fragments
+     * @param fragment
+     */
     private void changeFragment(Fragment fragment){
         if(!fragment.isVisible()){
             getParentFragmentManager().beginTransaction().replace(R.id.fragmentG, fragment).commit();

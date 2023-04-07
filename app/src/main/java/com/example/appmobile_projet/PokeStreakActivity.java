@@ -41,16 +41,40 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     int statRetenu = 3;
     DBHandler db;
     private MediaPlayer mp;
+
+    /**
+     * lien avec la base de données
+     * @param activity
+     */
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
         db = new DBHandler(activity);
     }
+
+    /**
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstance If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
         return inflater.inflate(R.layout.frag_pokestreak, container, false);
     }
-    // A la création du fragment on créer 2 pokemon et on affiche leurs noms et leurs images
+
+    /**
+     * Initialisation de la vue
+     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         //association des élément à leurs vues :
@@ -71,6 +95,10 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
     }
     int statGetForL = 0;
     int statGetForR = 0;
+
+    /**
+     * @param view The view that was clicked.
+     */
     @Override // Appel lors d'un choix de l'utilisateur : instancie le score et lance le nouvelle affichage
     public void onClick(View view){
             switch (view.getId()){
@@ -103,6 +131,10 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
             setPokemons();
             score.setText("Votre série de victoire est de : "+points);
     }
+
+    /**
+     * @return
+     */
     public Pokemon compare(){ // Compare en fonction d'une statistique choisi aléatoirement les 2 pokemons et retourne celui en possédant le plus
         if (statGetForL == statGetForR){
             return null;
@@ -112,6 +144,11 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
             return pokemonR;
         }
     }
+
+    /**
+     * Affiche la question associée avec les nouvelles caractéristiques
+     * @param i
+     */
     public void showNewQuestion(int i){
         String resp = "Probléme d'affichage :/";
         switch (i){
@@ -135,18 +172,30 @@ public class PokeStreakActivity extends Fragment implements View.OnClickListener
         }
         question.setText(resp);
     }
+
+    /**
+     * Créer et affiche 2 nouveaux pokémons
+     */
     private void setPokemons(){
         requestOnAPI = new RequestTask();
         requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
         requestOnAPI = new RequestTask();
         requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
     }
+
+    /**
+     * Lors de la destruction du fragment on passe les pokémons a nul
+     */
     @Override
     public void onDestroy() {
         pokemonL =null;
         pokemonR = null;
         super.onDestroy();
     }
+
+    /**
+     * Tache asynchrone qui permet l'affichage des pokémons et les instancie par la même occasion
+     */
     private class RequestTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... number) {
             return requeteFindPokemonByNumber(number[0]);

@@ -13,6 +13,18 @@ public class Pokemon {
     private Integer defense_spe;
     private Integer speed;
 
+    /**
+     * Création de l'objet pokémon
+     * @param id
+     * @param name
+     * @param image
+     * @param hp
+     * @param attack
+     * @param defense
+     * @param attack_spe
+     * @param defense_spe
+     * @param speed
+     */
     public Pokemon(int id,String name, String image, Integer hp, Integer attack, Integer defense, Integer attack_spe, Integer defense_spe, Integer speed) {
         this.id = id;
         this.name = name;
@@ -95,6 +107,11 @@ public class Pokemon {
         this.speed = speed;
     }
 
+    /**
+     *
+     * @param i
+     * @return une caractéristique d'un pokémon
+     */
     public int getCarctFromInt(int i){
         switch (i) {
             case 1 :
@@ -112,15 +129,18 @@ public class Pokemon {
         }
         return getDefense();
     }
+
+    /**
+     *
+     * @return les détails d'un pokémon en chaine de caractères
+     */
     @Override
     public String toString(){
-        String details =
-                " Points de vie : " + "\t"+ this.getHp() +
+        return " Points de vie : " + "\t"+ this.getHp() +
                 "\n Attaque : " + "\t"+ this.getAttack() +
                 "\n Défense : " + "\t"+ this.getDefense() +
                 "\n Attaque spéciale : " + "\t"+ this.getAttack_spe() +
                 "\n Défense spéciale : " + "\t"+ this.getDefense_spe() +
-                        "\n Vitesse : " + "\t"+ this.getSpeed();
-        return details;
+                "\n Vitesse : " + "\t"+ this.getSpeed();
     }
 }

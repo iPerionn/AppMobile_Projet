@@ -21,15 +21,41 @@ public class PokedexActivity extends Fragment {
     private RecyclerView.LayoutManager layoutManager; // le gestionnaire de mise en page
     private TextView pokedexInfo;
     DBHandler db;
+
+    /**
+     * fait le lien avec la base de donnée
+     * @param activity
+     */
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
         db = new DBHandler(activity);
     }
+
+    /**
+     * *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstance If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
         return inflater.inflate(R.layout.frag_pokedex, container, false);
     }
+
+    /**
+     *
+     * @param v The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstance If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     * affiche la collection de pokémons dans la base de données
+     */
     @Override
     public void onViewCreated(View v, Bundle savedInstance){
         pokedexInfo = v.findViewById(R.id.pokedexInfo);
@@ -46,6 +72,10 @@ public class PokedexActivity extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Affichage de l'état de la collection
+     * @param tv
+     */
     public void setTextInfo(TextView tv) {
         if (db.selectAll().size() ==0 ) {
             tv.setText("Vous n'avez pas encore de pokémons dans votre pokedex, n'hesitez pas à jouez à nos mini-jeux pour en débloquer !");

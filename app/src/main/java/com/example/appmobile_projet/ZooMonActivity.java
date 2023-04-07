@@ -39,16 +39,40 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
     View context;
     int score_numerique;
     DBHandler db;
+
+    /**
+     * lien avec la base de données
+     * @param activity
+     */
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
         db = new DBHandler(activity);
     }
+
+    /**
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstance If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance) {
         return inflater.inflate(R.layout.frag_zoomon, container, false);
     }
-    // A la création du fragment on créer 2 pokemon et on affiche leurs noms et leurs images
+
+    /**
+     * Initialisation de la vue
+     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         requestOnAPI = new RequestTask();
@@ -61,6 +85,9 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
         view.findViewById(R.id.refresh).setOnClickListener(this);
     }
 
+    /**
+     * Lors de la destruction du fragment on passe le pokémon a nul
+     */
     @Override
     public void onDestroy() {
         imageURL = null;
@@ -69,6 +96,10 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
         super.onDestroy();
     }
 
+    /**
+     * Récupère la chaine de caractères entrée par l'utilisateur et la compare avec celle du pokémon
+     * @param view The view that was clicked.
+     */
     @Override
     public void onClick(View view){
         if (view.getId() == R.id.refresh){
@@ -89,6 +120,11 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
         }
     }
 
+    /**
+     * Vérifie la réponse de l'utilisateur
+     * Incrémente son score en cas de bonne réponse sinon remet à 0
+     * @param reponseUtilisateur
+     */
     private void verifRéponse(String reponseUtilisateur) {
         if ( reponseUtilisateur.equalsIgnoreCase(nomPokemon)) {
             score_numerique++;
@@ -97,10 +133,17 @@ public class ZooMonActivity extends Fragment implements View.OnClickListener{
         }
     }
 
+    /**
+     * Appel de la requete API
+     */
     private void chargementNouveauPokemon(){
         requestOnAPI = new RequestTask();
         requestOnAPI.execute(String.valueOf((int)(Math.random() * 151) + 1));
     }
+
+    /**
+     * Charge l'image du pokémon et récupère son nom via l'API
+     */
     private class RequestTask extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... number) {
