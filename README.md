@@ -5,8 +5,8 @@ Henri Cossais.
 Cette application a été réaliser dans le cadre de notre 3ème année de licence pour la matière "programmation mobil" supervisée par 
 M. Pierre Desport.
 
-Nous utilisons la librairie Picasso : [lien](https://square.github.io/picasso/)
-Et l'api pokebuild pour les pokemons : [lien](https://pokebuildapi.fr/api/v1)
+Nous utilisons la librairie Picasso : [lien](https://square.github.io/picasso/).
+Et l'api pokebuild pour les pokemons : [lien](https://pokebuildapi.fr/api/v1).
 
 # L'application
 Notre application est un regroupement de mini-jeux :
